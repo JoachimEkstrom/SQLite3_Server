@@ -47,15 +47,18 @@ app.post('/addrow', function (req, res) {
         req.body.tAcknowlegedTime, req.body.tClearedTime, req.body.uiRepeatCount], 
         function(err) {
             if (err) {
-            return console.log(err.message);
+                console.log(err.message);
+                res.status(400).end()
+            } else {
+                // get the last insert id
+                //console.log(this.lastID);
+                //console.log(`Added post with id ${this.lastID}\n`)
+                res.status(204).end()
             }
-            // get the last insert id
-            //console.log(this.lastID);
-            console.log(`Added post with id ${this.lastID}\n`)
-            res.json(`Added post with id ${this.lastID}`)
+
         });
           // close the database connection
-    db.close();
+        db.close();
     
   })
 
